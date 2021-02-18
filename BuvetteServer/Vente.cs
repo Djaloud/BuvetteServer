@@ -22,6 +22,10 @@ namespace BuvetteServer
             row.MinimumHeight = 20;
             ChargerTableVente();
             timer1.Start();
+            DateTime Heure_Vente = DateTime.Parse(DateTime.Now.Date.ToString("d/M/yyyy"));
+           MessageBox.Show(Convert.ToString(Heure_Vente));
+            
+
         }
 
         private void TableVente_CellContentClick(object sender, DataGridViewCellEventArgs e)
