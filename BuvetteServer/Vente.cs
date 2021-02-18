@@ -22,9 +22,7 @@ namespace BuvetteServer
             row.MinimumHeight = 20;
             ChargerTableVente();
             timer1.Start();
-            DateTime Heure_Vente = DateTime.Parse(DateTime.Now.Date.ToString("d/M/yyyy"));
-           MessageBox.Show(Convert.ToString(Heure_Vente));
-            
+                   
 
         }
 
@@ -98,7 +96,8 @@ namespace BuvetteServer
 
         private void ChargerTableVente()
         {
-            DateTime Heure_Vente=DateTime.Parse(DateTime.Now.ToString("d/M/yyyy"));
+           
+            DateTime Heure_Vente =DateTime.Parse(DateTime.Now.ToString("d/M/yyyy"));
             String date = Convert.ToString(Heure_Vente);
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try

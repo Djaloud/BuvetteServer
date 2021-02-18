@@ -47,5 +47,47 @@ namespace BuvetteServer
         {
 
         }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+     
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            string v = "";
+            String Heure_Vente = dateTimePicker1.Value.ToString("dd/MM/yy"); ;
+            SqlConnection conn = ConnexionDb.GetDBConnection();
+            try
+            {
+                conn.Open();
+                SqlCommand insertProduit = new SqlCommand("SELECT SUM(prix_unitaire*qte) FROM Vente where date_vente=@dte and EtatCommande=@servi", conn);
+                insertProduit.Parameters.Add(new SqlParameter("@dte", Heure_Vente));
+                insertProduit.Parameters.Add(new SqlParameter("@servi", "SERVI"));
+                SqlDataReader rd = insertProduit.ExecuteReader();
+                while (rd.Read())
+                {
+                    v = Convert.ToString(rd[0]);
+
+                }
+                if (v != "")
+                {
+                    argent.Text = v + " Dirhams";
+                }
+                else
+                {
+                    argent.Text = "0 Dirhams";
+                }
+
+            }
+            catch (Exception ec)
+            {
+                Console.WriteLine("Error: " + ec.Message);
+            }
+
+        }
     }
 }
