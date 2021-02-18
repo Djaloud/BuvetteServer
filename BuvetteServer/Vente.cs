@@ -94,11 +94,14 @@ namespace BuvetteServer
 
         private void ChargerTableVente()
         {
+            DateTime Heure_Vente=DateTime.Parse(DateTime.Now.ToString("d/M/yyyy"));
+            String date = Convert.ToString(Heure_Vente);
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try
             {
                 conn.Open();
-                SqlCommand SelectVente = new SqlCommand("SELECT * from vente", conn);
+                SqlCommand SelectVente = new SqlCommand("SELECT * from vente where date_vente=@dat", conn);
+                SelectVente.Parameters.Add(new SqlParameter("@dat", date));
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = SelectVente;
                 DataTable MydataSet = new DataTable();
