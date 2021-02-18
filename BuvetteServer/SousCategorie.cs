@@ -113,5 +113,10 @@ namespace BuvetteServer
             }
             
         }
+
+        private void SousCategorie_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

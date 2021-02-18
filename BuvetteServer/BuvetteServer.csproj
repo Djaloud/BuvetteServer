@@ -72,6 +72,12 @@
     <Compile Include="SousCategorie.Designer.cs">
       <DependentUpon>SousCategorie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Statistique.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistique.Designer.cs">
+      <DependentUpon>Statistique.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="SousCategorie.resx">
       <DependentUpon>SousCategorie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistique.resx">
+      <DependentUpon>Statistique.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vente.resx">
       <DependentUpon>Vente.cs</DependentUpon>

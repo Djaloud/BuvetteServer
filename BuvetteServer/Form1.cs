@@ -19,11 +19,13 @@ namespace BuvetteServer
         Categorie n1; 
         SousCategorie sc;
         Vente vt;
+        Statistique st;
         public Form1()
         {
             n1 = new Categorie();
             sc = new SousCategorie();
             vt = new Vente();
+            st = new Statistique();
             InitializeComponent();
             if (this.PannPrincipale.Controls.Count > 0)
             {
@@ -104,6 +106,19 @@ namespace BuvetteServer
         private void PannPrincipale_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void bunifuFlatButton4_Click(object sender, EventArgs e)
+        {
+            if (this.PannPrincipale.Controls.Count > 0)
+            {
+                this.PannPrincipale.Controls.RemoveAt(0);
+            }
+            st.TopLevel = false;
+            st.Dock = DockStyle.Fill;
+            this.PannPrincipale.Controls.Add(st);
+            this.PannPrincipale.Tag = st;
+            st.Visible = true;
         }
     }
 }
