@@ -25,7 +25,8 @@ namespace BuvetteServer
             try
             {
                 conn.Open();
-                SqlCommand SelectVente = new SqlCommand("SELECT * from vente", conn);
+                SqlCommand SelectVente = new SqlCommand("SELECT * from vente where EtatCommande=@servi", conn);
+                SelectVente.Parameters.Add(new SqlParameter("@servi", "SERVI"));
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = SelectVente;
                 DataTable MydataSet = new DataTable();
@@ -39,6 +40,11 @@ namespace BuvetteServer
             {
                 Console.WriteLine("Error: " + ec.Message);
             }
+
+        }
+
+        private void TableVente_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

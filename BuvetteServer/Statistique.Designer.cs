@@ -98,6 +98,7 @@ namespace BuvetteServer
             this.TableVente.ReadOnly = true;
             this.TableVente.Size = new System.Drawing.Size(934, 357);
             this.TableVente.TabIndex = 1;
+            this.TableVente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableVente_CellContentClick);
             // 
             // tabPage2
             // 
