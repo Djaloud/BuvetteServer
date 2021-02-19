@@ -62,7 +62,7 @@ namespace BuvetteServer
         }
        
         /************** Methode qui permet de charger les donnees dans le datagridview des produits **************************/
-        private void Charger_Data()
+        private  void Charger_Data()
         {
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try

@@ -199,7 +199,7 @@ namespace BuvetteServer
         private void SupprimerProduit_Click(object sender, EventArgs e)
         {
            
-                DialogResult rs = MessageBox.Show("Etes-vous sur de supprimer?", "INFORMATION", MessageBoxButtons.YesNo);
+                DialogResult rs = MessageBox.Show("Etes-vous sur de supprimer?\nla suppression se fait en cascade.\nles sous categories seront egalement supprimé \nainsi que toutes les ventes associés", "INFORMATION", MessageBoxButtons.YesNo);
                 try
                 {
                     if (rs == DialogResult.Yes)
@@ -258,6 +258,16 @@ namespace BuvetteServer
         private void Recherche_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void bunifuFlatButton4_Click(object sender, EventArgs e)
+        {
+            TableSousProduit();
+        }
+
+        private void bunifuFlatButton5_Click(object sender, EventArgs e)
+        {
+            Table_Produit();
         }
     }
 }
