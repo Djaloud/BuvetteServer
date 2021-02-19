@@ -83,6 +83,7 @@ namespace BuvetteServer
             }
         }
         /************** Methode qui permet de charger les donnees dans le datagridview des gestions de produits **************************/
+        DataTable Cat = new DataTable("Produit");
         private void Table_Produit()
         {
             SqlConnection conn = ConnexionDb.GetDBConnection();
@@ -92,12 +93,12 @@ namespace BuvetteServer
                 SqlCommand insertProduit = new SqlCommand("SELECT ref_produit as REFERENCE,nom_produit as NOM_PRODUIT FROM Produit", conn);
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = insertProduit;
-                DataTable MydataSet = new DataTable();
-                sda.Fill(MydataSet);
+                
+                sda.Fill(Cat);
                 BindingSource bS = new BindingSource();
-                bS.DataSource = MydataSet;
+                bS.DataSource = Cat;
                 TableCategorie.DataSource = bS;
-                sda.Update(MydataSet);
+                sda.Update(Cat);
                 
                
             }
@@ -262,12 +263,23 @@ namespace BuvetteServer
 
         private void bunifuFlatButton4_Click(object sender, EventArgs e)
         {
+
             TableSousProduit();
         }
 
         private void bunifuFlatButton5_Click(object sender, EventArgs e)
         {
+           
             Table_Produit();
+        }
+
+        private void Recherche_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+                DataView dv = Cat.DefaultView;
+                dv.RowFilter = string.Format("nom_produit like '%{0}%'", Recherche.Text);
+                TableCategorie.DataSource = dv.ToTable();
+            
         }
     }
 }
