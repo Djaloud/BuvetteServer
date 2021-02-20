@@ -17,6 +17,7 @@ namespace BuvetteServer
         {
             InitializeComponent();
             ChargerTableVente();
+             charger_chart();
         }
 
         private void ChargerTableVente()
@@ -40,6 +41,7 @@ namespace BuvetteServer
             {
                 Console.WriteLine("Error: " + ec.Message);
             }
+            conn.Close();
 
         }
 
@@ -53,7 +55,32 @@ namespace BuvetteServer
 
         }
 
+        private void charger_chart()
+        {
+            chart1.Titles.Add("Bilan Journalier");
+            SqlConnection conn = ConnexionDb.GetDBConnection();
+            try
+            {
+                conn.Open();
+                SqlCommand insertProduit = new SqlCommand("SELECT date_vente,SUM(prix_unitaire*qte) FROM Vente where EtatCommande=@servi group by date_vente", conn);
+      
+                insertProduit.Parameters.Add(new SqlParameter("@servi", "SERVI"));
+                SqlDataReader rd8 = insertProduit.ExecuteReader();
+                while (rd8.Read())
+                {
+                    
+                    chart1.Series["Bilan"].Points.AddXY(rd8[0], rd8[1]);
 
+                }
+                
+            }
+            catch (Exception ec)
+            {
+                Console.WriteLine("Error: " + ec.Message);
+            }
+            conn.Close();
+
+        }
 
      
         private void button2_Click_1(object sender, EventArgs e)
