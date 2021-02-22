@@ -104,13 +104,16 @@ namespace BuvetteServer
             }
             else
             {
-                SqlCommand insertProduit = new SqlCommand("insert into Sous_Produit(nom_sous_produit,prix_unitaire,ref_produit) values(@nom_Sous,@Prix_Sous,@Ref_Sous)", conn);
+                SqlCommand insertProduit = new SqlCommand("insert into Sous_Produit(nom_sous_produit,prix_unitaire,ref_produit,qte) values(@nom_Sous,@Prix_Sous,@Ref_Sous,@qte)", conn);
                 insertProduit.Parameters.Add(new SqlParameter("@nom_Sous", Nom_SousProduit.Text));
                 insertProduit.Parameters.Add(new SqlParameter("@Prix_Sous", Prix_SousProduit.Text));
                 insertProduit.Parameters.Add(new SqlParameter("@Ref_Sous", Ref_SousProduit.Text));
+                insertProduit.Parameters.Add(new SqlParameter("@qte", txtQte.Text));
+
                 insertProduit.ExecuteNonQuery();
                 Nom_SousProduit.Text = "";
                 Prix_SousProduit.Text = "";
+                txtQte.Text = "";
             }
             
         }
@@ -124,5 +127,7 @@ namespace BuvetteServer
         {
             Charger_Data();
         }
+
+      
     }
 }

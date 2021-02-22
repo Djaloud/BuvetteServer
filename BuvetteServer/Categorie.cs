@@ -57,7 +57,7 @@ namespace BuvetteServer
             try
             {
                 conn.Open();
-                SqlCommand insertProduit = new SqlCommand("select id_sous_produit as ID_SOUS_PRODUIT,nom_sous_produit as NOM,prix_unitaire as PRIX,ref_produit as REFERENCE from sous_produit", conn);
+                SqlCommand insertProduit = new SqlCommand("select id_sous_produit as ID_SOUS_PRODUIT,nom_sous_produit as NOM,prix_unitaire as PRIX,ref_produit as REFERENCE,qte as Quantite from sous_produit", conn);
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = insertProduit;
                 DataTable MydataSet = new DataTable();
@@ -113,6 +113,7 @@ namespace BuvetteServer
                 NomSProduit.Text = TbleSousProduit.Rows[e.RowIndex].Cells[1].Value.ToString();
                 PrixSProduit.Text = TbleSousProduit.Rows[e.RowIndex].Cells[2].Value.ToString();
                 CatSProduit.Text = TbleSousProduit.Rows[e.RowIndex].Cells[3].Value.ToString();
+                txtQtite.Text= TbleSousProduit.Rows[e.RowIndex].Cells[4].Value.ToString();
 
             }
         }
@@ -143,6 +144,7 @@ namespace BuvetteServer
                     NomSProduit.Text = "";
                     PrixSProduit.Text = "";
                     CatSProduit.Text = "";
+                    txtQtite.Text = "";
                 }
             }
             catch (Exception)
@@ -163,16 +165,17 @@ namespace BuvetteServer
             
 
             // requette pour la modification dans la base de donnnee
-            SqlCommand insertProduit = new SqlCommand("UPDATE Sous_Produit set nom_sous_produit=@nom,prix_unitaire=@prix,ref_produit=@ref_produit where id_sous_produit= @Ref", conn);
+            SqlCommand insertProduit = new SqlCommand("UPDATE Sous_Produit set nom_sous_produit=@nom,prix_unitaire=@prix,ref_produit=@ref_produit,qte=@ref_qte where id_sous_produit= @Ref", conn);
 
             // on remplace les parametre de la requete @ref par ce que l utilisateur va saisir ( Id_produit.Text)
             insertProduit.Parameters.Add(new SqlParameter("@Ref", Id_produit.Text));
             insertProduit.Parameters.Add(new SqlParameter("@nom", NomSProduit.Text));
             insertProduit.Parameters.Add(new SqlParameter("@prix", PrixSProduit.Text));
             insertProduit.Parameters.Add(new SqlParameter("@ref_produit", CatSProduit.Text));
-            // execution de la requete
+            insertProduit.Parameters.Add(new SqlParameter("@ref_qte", txtQtite.Text));
+                // execution de la requete
 
-            int i=insertProduit.ExecuteNonQuery();
+                int i=insertProduit.ExecuteNonQuery();
             if (i == 0)
             {
                 MessageBox.Show("Oups on ne peut pas modifier l'Id");
@@ -186,7 +189,8 @@ namespace BuvetteServer
                 NomSProduit.Text = "";
                 PrixSProduit.Text = "";
                 CatSProduit.Text = "";
-            }
+                txtQtite.Text = "";
+                }
 
             }
             catch (Exception ec)
