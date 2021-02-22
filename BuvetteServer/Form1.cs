@@ -49,10 +49,7 @@ namespace BuvetteServer
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
+       
         
         private void bunifuFlatButton1_Click(object sender, EventArgs e)
         {

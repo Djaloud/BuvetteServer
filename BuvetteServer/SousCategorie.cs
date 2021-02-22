@@ -17,6 +17,7 @@ namespace BuvetteServer
         {
             InitializeComponent();
             Charger_Data();
+            categ.Start();
         }
 
         private void ValiderCat_Click(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace BuvetteServer
         }
        
         /************** Methode qui permet de charger les donnees dans le datagridview des produits **************************/
-        private  void Charger_Data()
+        public  void Charger_Data()
         {
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try
@@ -117,6 +118,11 @@ namespace BuvetteServer
         private void SousCategorie_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void categ_Tick(object sender, EventArgs e)
+        {
+            Charger_Data();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace BuvetteServer
             this.label3.Size = new System.Drawing.Size(175, 25);
             this.label3.TabIndex = 3;
             this.label3.Text = "ESPACE ADMIN";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+           
             // 
             // panel1
             // 

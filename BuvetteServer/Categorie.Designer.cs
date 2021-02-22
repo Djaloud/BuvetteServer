@@ -32,6 +32,7 @@ namespace BuvetteServer
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Recherche = new System.Windows.Forms.TextBox();
             this.bunifuFlatButton5 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuCards2 = new Bunifu.Framework.UI.BunifuCards();
             this.TableCategorie = new System.Windows.Forms.DataGridView();
@@ -42,12 +43,8 @@ namespace BuvetteServer
             this.ref_Gestion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Nom_Gestion = new System.Windows.Forms.TextBox();
-            this.RechercheCat = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.Recherche = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.bunifuFlatButton4 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuFlatButton3 = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.TbleSousProduit = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -61,6 +58,7 @@ namespace BuvetteServer
             this.label4 = new System.Windows.Forms.Label();
             this.NomSProduit = new System.Windows.Forms.TextBox();
             this.Id_produit = new System.Windows.Forms.TextBox();
+            this.bunifuFlatButton4 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.bunifuCards2.SuspendLayout();
@@ -87,11 +85,10 @@ namespace BuvetteServer
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage1.Controls.Add(this.Recherche);
             this.tabPage1.Controls.Add(this.bunifuFlatButton5);
             this.tabPage1.Controls.Add(this.bunifuCards2);
             this.tabPage1.Controls.Add(this.bunifuCards1);
-            this.tabPage1.Controls.Add(this.RechercheCat);
-            this.tabPage1.Controls.Add(this.Recherche);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
@@ -99,6 +96,16 @@ namespace BuvetteServer
             this.tabPage1.Size = new System.Drawing.Size(1056, 480);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Gestion Categorie";
+            // 
+            // Recherche
+            // 
+            this.Recherche.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Recherche.Location = new System.Drawing.Point(27, 156);
+            this.Recherche.Name = "Recherche";
+            this.Recherche.Size = new System.Drawing.Size(689, 26);
+            this.Recherche.TabIndex = 13;
+            this.Recherche.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Recherche_KeyPress);
             // 
             // bunifuFlatButton5
             // 
@@ -122,14 +129,14 @@ namespace BuvetteServer
             this.bunifuFlatButton5.IconVisible = false;
             this.bunifuFlatButton5.IconZoom = 90D;
             this.bunifuFlatButton5.IsTab = false;
-            this.bunifuFlatButton5.Location = new System.Drawing.Point(868, 161);
+            this.bunifuFlatButton5.Location = new System.Drawing.Point(793, 156);
             this.bunifuFlatButton5.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.bunifuFlatButton5.Name = "bunifuFlatButton5";
             this.bunifuFlatButton5.Normalcolor = System.Drawing.Color.RoyalBlue;
             this.bunifuFlatButton5.OnHovercolor = System.Drawing.Color.RoyalBlue;
             this.bunifuFlatButton5.OnHoverTextColor = System.Drawing.Color.Gray;
             this.bunifuFlatButton5.selected = false;
-            this.bunifuFlatButton5.Size = new System.Drawing.Size(127, 26);
+            this.bunifuFlatButton5.Size = new System.Drawing.Size(186, 26);
             this.bunifuFlatButton5.TabIndex = 12;
             this.bunifuFlatButton5.Text = "Actualiser";
             this.bunifuFlatButton5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -218,7 +225,7 @@ namespace BuvetteServer
             this.SupprimerProduit.IconVisible = false;
             this.SupprimerProduit.IconZoom = 90D;
             this.SupprimerProduit.IsTab = false;
-            this.SupprimerProduit.Location = new System.Drawing.Point(860, 62);
+            this.SupprimerProduit.Location = new System.Drawing.Point(860, 58);
             this.SupprimerProduit.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.SupprimerProduit.Name = "SupprimerProduit";
             this.SupprimerProduit.Normalcolor = System.Drawing.Color.RoyalBlue;
@@ -255,7 +262,7 @@ namespace BuvetteServer
             this.ModifierProduit.IconVisible = false;
             this.ModifierProduit.IconZoom = 90D;
             this.ModifierProduit.IsTab = false;
-            this.ModifierProduit.Location = new System.Drawing.Point(675, 62);
+            this.ModifierProduit.Location = new System.Drawing.Point(678, 59);
             this.ModifierProduit.Margin = new System.Windows.Forms.Padding(8);
             this.ModifierProduit.Name = "ModifierProduit";
             this.ModifierProduit.Normalcolor = System.Drawing.Color.RoyalBlue;
@@ -308,60 +315,10 @@ namespace BuvetteServer
             this.Nom_Gestion.Size = new System.Drawing.Size(212, 24);
             this.Nom_Gestion.TabIndex = 7;
             // 
-            // RechercheCat
-            // 
-            this.RechercheCat.Activecolor = System.Drawing.Color.Blue;
-            this.RechercheCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RechercheCat.BackColor = System.Drawing.Color.RoyalBlue;
-            this.RechercheCat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.RechercheCat.BorderRadius = 7;
-            this.RechercheCat.ButtonText = "Rechercher";
-            this.RechercheCat.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RechercheCat.DisabledColor = System.Drawing.Color.Gray;
-            this.RechercheCat.Iconcolor = System.Drawing.Color.Transparent;
-            this.RechercheCat.Iconimage = null;
-            this.RechercheCat.Iconimage_right = null;
-            this.RechercheCat.Iconimage_right_Selected = null;
-            this.RechercheCat.Iconimage_Selected = null;
-            this.RechercheCat.IconMarginLeft = 0;
-            this.RechercheCat.IconMarginRight = 0;
-            this.RechercheCat.IconRightVisible = false;
-            this.RechercheCat.IconRightZoom = 0D;
-            this.RechercheCat.IconVisible = false;
-            this.RechercheCat.IconZoom = 90D;
-            this.RechercheCat.IsTab = false;
-            this.RechercheCat.Location = new System.Drawing.Point(683, 161);
-            this.RechercheCat.Margin = new System.Windows.Forms.Padding(5);
-            this.RechercheCat.Name = "RechercheCat";
-            this.RechercheCat.Normalcolor = System.Drawing.Color.RoyalBlue;
-            this.RechercheCat.OnHovercolor = System.Drawing.Color.RoyalBlue;
-            this.RechercheCat.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.RechercheCat.selected = false;
-            this.RechercheCat.Size = new System.Drawing.Size(117, 26);
-            this.RechercheCat.TabIndex = 7;
-            this.RechercheCat.Text = "Rechercher";
-            this.RechercheCat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.RechercheCat.Textcolor = System.Drawing.Color.White;
-            this.RechercheCat.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RechercheCat.Click += new System.EventHandler(this.RechercheCat_Click);
-            // 
-            // Recherche
-            // 
-            this.Recherche.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Recherche.Location = new System.Drawing.Point(36, 161);
-            this.Recherche.Name = "Recherche";
-            this.Recherche.Size = new System.Drawing.Size(545, 26);
-            this.Recherche.TabIndex = 2;
-            this.Recherche.TextChanged += new System.EventHandler(this.Recherche_TextChanged);
-            this.Recherche.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Recherche_KeyPress);
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabPage2.Controls.Add(this.bunifuFlatButton4);
             this.tabPage2.Controls.Add(this.bunifuFlatButton3);
-            this.tabPage2.Controls.Add(this.textBox4);
             this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Controls.Add(this.panel4);
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
@@ -369,43 +326,6 @@ namespace BuvetteServer
             this.tabPage2.Size = new System.Drawing.Size(1056, 480);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Gestion SousCategorie";
-            // 
-            // bunifuFlatButton4
-            // 
-            this.bunifuFlatButton4.Activecolor = System.Drawing.Color.Blue;
-            this.bunifuFlatButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuFlatButton4.BackColor = System.Drawing.Color.RoyalBlue;
-            this.bunifuFlatButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuFlatButton4.BorderRadius = 7;
-            this.bunifuFlatButton4.ButtonText = "Actualiser";
-            this.bunifuFlatButton4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuFlatButton4.DisabledColor = System.Drawing.Color.Gray;
-            this.bunifuFlatButton4.Iconcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButton4.Iconimage = null;
-            this.bunifuFlatButton4.Iconimage_right = null;
-            this.bunifuFlatButton4.Iconimage_right_Selected = null;
-            this.bunifuFlatButton4.Iconimage_Selected = null;
-            this.bunifuFlatButton4.IconMarginLeft = 0;
-            this.bunifuFlatButton4.IconMarginRight = 0;
-            this.bunifuFlatButton4.IconRightVisible = false;
-            this.bunifuFlatButton4.IconRightZoom = 0D;
-            this.bunifuFlatButton4.IconVisible = false;
-            this.bunifuFlatButton4.IconZoom = 90D;
-            this.bunifuFlatButton4.IsTab = false;
-            this.bunifuFlatButton4.Location = new System.Drawing.Point(838, 169);
-            this.bunifuFlatButton4.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bunifuFlatButton4.Name = "bunifuFlatButton4";
-            this.bunifuFlatButton4.Normalcolor = System.Drawing.Color.RoyalBlue;
-            this.bunifuFlatButton4.OnHovercolor = System.Drawing.Color.MediumBlue;
-            this.bunifuFlatButton4.OnHoverTextColor = System.Drawing.Color.White;
-            this.bunifuFlatButton4.selected = false;
-            this.bunifuFlatButton4.Size = new System.Drawing.Size(162, 31);
-            this.bunifuFlatButton4.TabIndex = 10;
-            this.bunifuFlatButton4.Text = "Actualiser";
-            this.bunifuFlatButton4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuFlatButton4.Textcolor = System.Drawing.Color.White;
-            this.bunifuFlatButton4.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuFlatButton4.Click += new System.EventHandler(this.bunifuFlatButton4_Click);
             // 
             // bunifuFlatButton3
             // 
@@ -443,23 +363,17 @@ namespace BuvetteServer
             this.bunifuFlatButton3.Textcolor = System.Drawing.Color.White;
             this.bunifuFlatButton3.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(38, 169);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(593, 24);
-            this.textBox4.TabIndex = 8;
-            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.bunifuFlatButton4);
             this.panel3.Controls.Add(this.TbleSousProduit);
-            this.panel3.Location = new System.Drawing.Point(20, 210);
+            this.panel3.Location = new System.Drawing.Point(20, 165);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1017, 258);
+            this.panel3.Size = new System.Drawing.Size(1017, 303);
             this.panel3.TabIndex = 3;
             // 
             // TbleSousProduit
@@ -472,10 +386,10 @@ namespace BuvetteServer
             this.TbleSousProduit.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.TbleSousProduit.BackgroundColor = System.Drawing.SystemColors.Window;
             this.TbleSousProduit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TbleSousProduit.Location = new System.Drawing.Point(20, 16);
+            this.TbleSousProduit.Location = new System.Drawing.Point(20, 62);
             this.TbleSousProduit.Name = "TbleSousProduit";
             this.TbleSousProduit.ReadOnly = true;
-            this.TbleSousProduit.Size = new System.Drawing.Size(972, 228);
+            this.TbleSousProduit.Size = new System.Drawing.Size(972, 227);
             this.TbleSousProduit.TabIndex = 0;
             this.TbleSousProduit.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TbleSousProduit_CellContentClick);
             // 
@@ -651,6 +565,43 @@ namespace BuvetteServer
             this.Id_produit.Size = new System.Drawing.Size(214, 24);
             this.Id_produit.TabIndex = 6;
             // 
+            // bunifuFlatButton4
+            // 
+            this.bunifuFlatButton4.Activecolor = System.Drawing.Color.Blue;
+            this.bunifuFlatButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuFlatButton4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.bunifuFlatButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButton4.BorderRadius = 7;
+            this.bunifuFlatButton4.ButtonText = "Actualiser";
+            this.bunifuFlatButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButton4.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButton4.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButton4.Iconimage = null;
+            this.bunifuFlatButton4.Iconimage_right = null;
+            this.bunifuFlatButton4.Iconimage_right_Selected = null;
+            this.bunifuFlatButton4.Iconimage_Selected = null;
+            this.bunifuFlatButton4.IconMarginLeft = 0;
+            this.bunifuFlatButton4.IconMarginRight = 0;
+            this.bunifuFlatButton4.IconRightVisible = false;
+            this.bunifuFlatButton4.IconRightZoom = 0D;
+            this.bunifuFlatButton4.IconVisible = false;
+            this.bunifuFlatButton4.IconZoom = 90D;
+            this.bunifuFlatButton4.IsTab = false;
+            this.bunifuFlatButton4.Location = new System.Drawing.Point(304, 7);
+            this.bunifuFlatButton4.Margin = new System.Windows.Forms.Padding(13, 10, 13, 10);
+            this.bunifuFlatButton4.Name = "bunifuFlatButton4";
+            this.bunifuFlatButton4.Normalcolor = System.Drawing.Color.RoyalBlue;
+            this.bunifuFlatButton4.OnHovercolor = System.Drawing.Color.MediumBlue;
+            this.bunifuFlatButton4.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButton4.selected = false;
+            this.bunifuFlatButton4.Size = new System.Drawing.Size(392, 43);
+            this.bunifuFlatButton4.TabIndex = 11;
+            this.bunifuFlatButton4.Text = "Actualiser";
+            this.bunifuFlatButton4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButton4.Textcolor = System.Drawing.Color.White;
+            this.bunifuFlatButton4.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuFlatButton4.Click += new System.EventHandler(this.bunifuFlatButton4_Click_1);
+            // 
             // Categorie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -671,7 +622,6 @@ namespace BuvetteServer
             this.bunifuCards1.ResumeLayout(false);
             this.bunifuCards1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TbleSousProduit)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -685,8 +635,6 @@ namespace BuvetteServer
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox Recherche;
-        private Bunifu.Framework.UI.BunifuFlatButton RechercheCat;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView TbleSousProduit;
         private System.Windows.Forms.Panel panel4;
@@ -696,9 +644,7 @@ namespace BuvetteServer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox NomSProduit;
         private System.Windows.Forms.TextBox Id_produit;
-        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton4;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox CatSProduit;
         private System.Windows.Forms.Label p;
@@ -713,5 +659,7 @@ namespace BuvetteServer
         private Bunifu.Framework.UI.BunifuCards bunifuCards2;
         private System.Windows.Forms.DataGridView TableCategorie;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton5;
+        private System.Windows.Forms.TextBox Recherche;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton4;
     }
 }

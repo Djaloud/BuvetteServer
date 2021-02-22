@@ -19,11 +19,7 @@ namespace BuvetteServer
             Table_Produit();
             TableSousProduit();
         }
-
-        private void ValiderCat_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
         private void bunifuFlatButton2_Click(object sender, EventArgs e)
         {
@@ -33,16 +29,10 @@ namespace BuvetteServer
                 if (rs==DialogResult.Yes)
                 {
                     SqlConnection conn = ConnexionDb.GetDBConnection();
-                    try
-                    {
+                    
                         conn.Open();
 
-                    }
-                    catch (Exception ec)
-                    {
-                        Console.WriteLine("Error: " + ec.Message);
-                    }
-                    
+                   
                         SqlCommand insertProduit = new SqlCommand("DELETE from Produit where ref_produit=@Ref", conn);
                         insertProduit.Parameters.Add(new SqlParameter("@Ref", ref_Gestion.Text));
                         insertProduit.ExecuteNonQuery();
@@ -53,11 +43,12 @@ namespace BuvetteServer
                     
                 }
             }
-            catch(Exception)
+            
+            catch (Exception ec)
             {
-                throw;
+                MessageBox.Show(ec.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+}
 
         /************** Methode qui permet de charger les donnees dans le datagridview des gestions des sous_produits **************************/
         private void TableSousProduit()
@@ -83,20 +74,22 @@ namespace BuvetteServer
             }
         }
         /************** Methode qui permet de charger les donnees dans le datagridview des gestions de produits **************************/
-        DataTable Cat = new DataTable("Produit");
+        
         private void Table_Produit()
         {
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try
             {
+
                 conn.Open();
                 SqlCommand insertProduit = new SqlCommand("SELECT ref_produit as REFERENCE,nom_produit as NOM_PRODUIT FROM Produit", conn);
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = insertProduit;
-                
+                DataTable Cat = new DataTable();
                 sda.Fill(Cat);
                 BindingSource bS = new BindingSource();
                 bS.DataSource = Cat;
+                
                 TableCategorie.DataSource = bS;
                 sda.Update(Cat);
                 
@@ -167,11 +160,7 @@ namespace BuvetteServer
                 // ouverture de la base de donnée
                 conn.Open();
 
-            }
-            catch (Exception ec)
-            {
-                Console.WriteLine("Error: " + ec.Message);
-            }
+            
 
             // requette pour la modification dans la base de donnnee
             SqlCommand insertProduit = new SqlCommand("UPDATE Sous_Produit set nom_sous_produit=@nom,prix_unitaire=@prix,ref_produit=@ref_produit where id_sous_produit= @Ref", conn);
@@ -182,20 +171,33 @@ namespace BuvetteServer
             insertProduit.Parameters.Add(new SqlParameter("@prix", PrixSProduit.Text));
             insertProduit.Parameters.Add(new SqlParameter("@ref_produit", CatSProduit.Text));
             // execution de la requete
-            insertProduit.ExecuteNonQuery();
+
+            int i=insertProduit.ExecuteNonQuery();
+            if (i == 0)
+            {
+                MessageBox.Show("Oups on ne peut pas modifier l'Id");
+            }
+            else
+            {
+                // je charge le datagrid pour pouvoir voir les modification
+                TableSousProduit();
+                // je vide les champs de saisie 
+                Id_produit.Text = "";
+                NomSProduit.Text = "";
+                PrixSProduit.Text = "";
+                CatSProduit.Text = "";
+            }
+
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message,"Message" ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
             // je charge le datagrid pour pouvoir voir les modification
-            TableSousProduit();
-            // je vide les champs de saisie 
-            Id_produit.Text = "";
-            NomSProduit.Text = "";
-            PrixSProduit.Text = "";
-            CatSProduit.Text = "";
-        }
-
-        private void ModifierCat_Click(object sender, EventArgs e)
-        {
 
         }
+
+
 
         private void SupprimerProduit_Click(object sender, EventArgs e)
         {
@@ -221,8 +223,8 @@ namespace BuvetteServer
                         insertProduit.ExecuteNonQuery();
                         ref_Gestion.Text = "";
                         Nom_Gestion.Text = "";
-
                         Table_Produit();
+                       
 
                     }
                 }
@@ -246,40 +248,92 @@ namespace BuvetteServer
             }
         }
 
-        private void ModifierProduit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RechercheCat_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Recherche_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void bunifuFlatButton4_Click(object sender, EventArgs e)
-        {
-
-            TableSousProduit();
-        }
+       
+       
+       
 
         private void bunifuFlatButton5_Click(object sender, EventArgs e)
         {
-           
+            Recherche.Clear();
             Table_Produit();
         }
 
+      
+
+      
+
+       
         private void Recherche_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+            SqlConnection conn = ConnexionDb.GetDBConnection();
+            try
+            {
+
+                conn.Open();
+                SqlCommand insertProduit = new SqlCommand("SELECT ref_produit as REFERENCE,nom_produit as NOM_PRODUIT FROM Produit", conn);
+                SqlDataAdapter sda = new SqlDataAdapter();
+                sda.SelectCommand = insertProduit;
+                DataTable Cat = new DataTable();
+                sda.Fill(Cat);
+                BindingSource bS = new BindingSource();
+                bS.DataSource = Cat;
                 DataView dv = Cat.DefaultView;
                 dv.RowFilter = string.Format("nom_produit like '%{0}%'", Recherche.Text);
                 TableCategorie.DataSource = dv.ToTable();
+                sda.Update(Cat);
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void bunifuFlatButton4_Click_1(object sender, EventArgs e)
+        {
+            TableSousProduit();
+        }
+
+        private void ModifierProduit_Click(object sender, EventArgs e)
+        {
+            // connexion a la base de donnee
+            SqlConnection conn = ConnexionDb.GetDBConnection();
+            try
+            {
+                // ouverture de la base de donnée
+                conn.Open();
+
+
+                // requette pour la modification dans la base de donnnee
+                SqlCommand insertProduit = new SqlCommand("update Produit set nom_produit=@nom where ref_produit=@ref_produit", conn);
+
+                // on remplace les parametre de la requete @ref par ce que l utilisateur va saisir ( Id_produit.Text)
+
+                insertProduit.Parameters.Add(new SqlParameter("@nom", Nom_Gestion.Text));
+                insertProduit.Parameters.Add(new SqlParameter("@ref_produit", ref_Gestion.Text));
+                // execution de la requete
+                int i = insertProduit.ExecuteNonQuery();
+
             
+            if (i == 0)
+            {
+                MessageBox.Show("Oups on ne peut pas modifier la reference");
+            }
+            else
+            {
+                // je charge le datagrid pour pouvoir voir les modification
+                Table_Produit();
+                // je vide les champs de saisie 
+                Nom_Gestion.Text = "";
+                ref_Gestion.Text = "";
+            }
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
 }
