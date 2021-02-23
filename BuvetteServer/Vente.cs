@@ -98,13 +98,13 @@ namespace BuvetteServer
         {
            
             DateTime Heure_Vente =DateTime.Parse(DateTime.Now.ToString("d/M/yyyy"));
-            String date = Convert.ToString(Heure_Vente);
+            //String date = Convert.ToString(Heure_Vente);
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try
             {
                 conn.Open();
                 SqlCommand SelectVente = new SqlCommand("SELECT * from vente where date_vente=@dat", conn);
-                SelectVente.Parameters.Add(new SqlParameter("@dat", date));
+                SelectVente.Parameters.Add(new SqlParameter("@dat", Heure_Vente));
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = SelectVente;
                 DataTable MydataSet = new DataTable();

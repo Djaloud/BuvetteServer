@@ -189,7 +189,7 @@ namespace BuvetteServer
                 NomSProduit.Text = "";
                 PrixSProduit.Text = "";
                 CatSProduit.Text = "";
-                txtQtite.Text = "";
+                 txtQtite.Text = "";
                 }
 
             }

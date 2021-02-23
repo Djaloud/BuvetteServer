@@ -29,6 +29,7 @@ namespace BuvetteServer
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -41,6 +42,8 @@ namespace BuvetteServer
             this.TableVente = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.TimerStat = new System.Windows.Forms.Timer(this.components);
+            this.TimerTVente = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.bunifuCards5.SuspendLayout();
@@ -113,6 +116,7 @@ namespace BuvetteServer
             this.dateTimePicker1.Size = new System.Drawing.Size(410, 38);
             this.dateTimePicker1.TabIndex = 16;
             this.dateTimePicker1.Value = new System.DateTime(2021, 2, 18, 0, 0, 0, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // button2
             // 
@@ -206,6 +210,17 @@ namespace BuvetteServer
             this.chart1.Size = new System.Drawing.Size(895, 378);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
+            // 
+            // TimerStat
+            // 
+            this.TimerStat.Interval = 5000;
+            this.TimerStat.Tick += new System.EventHandler(this.TimerStat_Tick);
+            // 
+            // TimerTVente
+            // 
+            this.TimerTVente.Interval = 5000;
+            this.TimerTVente.Tick += new System.EventHandler(this.TimerTVente_Tick);
             // 
             // Statistique
             // 
@@ -240,5 +255,7 @@ namespace BuvetteServer
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Timer TimerStat;
+        private System.Windows.Forms.Timer TimerTVente;
     }
 }

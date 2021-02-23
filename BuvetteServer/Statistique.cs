@@ -17,7 +17,9 @@ namespace BuvetteServer
         {
             InitializeComponent();
             ChargerTableVente();
-             charger_chart();
+            charger_chart();
+            TimerStat.Start();
+            TimerTVente.Start();
         }
 
         private void ChargerTableVente()
@@ -83,16 +85,18 @@ namespace BuvetteServer
         }
 
      
-        private void button2_Click_1(object sender, EventArgs e)
+      
+        private void ChargetTableTVente()
         {
             string v = "";
-            String Heure_Vente = dateTimePicker1.Value.ToString("dd/MM/yy"); ;
+            String Heure_Vente = dateTimePicker1.Value.ToString("dd/MM/yy");
+            DateTime Dte = DateTime.Parse(Heure_Vente);
             SqlConnection conn = ConnexionDb.GetDBConnection();
             try
             {
                 conn.Open();
                 SqlCommand insertProduit = new SqlCommand("SELECT SUM(prix_unitaire*qte) FROM Vente where date_vente=@dte and EtatCommande=@servi", conn);
-                insertProduit.Parameters.Add(new SqlParameter("@dte", Heure_Vente));
+                insertProduit.Parameters.Add(new SqlParameter("@dte", Dte));
                 insertProduit.Parameters.Add(new SqlParameter("@servi", "SERVI"));
                 SqlDataReader rd = insertProduit.ExecuteReader();
                 while (rd.Read())
@@ -114,7 +118,31 @@ namespace BuvetteServer
             {
                 Console.WriteLine("Error: " + ec.Message);
             }
+        }
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ChargetTableTVente();
 
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TimerStat_Tick(object sender, EventArgs e)
+        {
+            charger_chart();
+        }
+
+        private void TimerTVente_Tick(object sender, EventArgs e)
+        {
+            ChargetTableTVente();
         }
     }
 }

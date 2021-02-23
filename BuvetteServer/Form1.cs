@@ -22,11 +22,12 @@ namespace BuvetteServer
         Statistique st;
         public Form1()
         {
+            InitializeComponent();
             n1 = new Categorie();
             sc = new SousCategorie();
             vt = new Vente();
             st = new Statistique();
-            InitializeComponent();
+            
             if (this.PannPrincipale.Controls.Count > 0)
             {
                 this.PannPrincipale.Controls.RemoveAt(0);
